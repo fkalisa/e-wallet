@@ -13,7 +13,7 @@ public class SmsUtil {
     private static final Logger logger = LoggerFactory.getLogger(SmsUtil.class);
 
     public final String ACCOUNT_SID = "AC4e7eafde3355607ea28918e2d8b2f1c9";
-    public  final String AUTH_TOKEN = "a75294f8a21205bf53b33dcbd3d32b80";
+    public  final String AUTH_TOKEN = "TODO";
 
     void sendSms()throws URISyntaxException {
 
