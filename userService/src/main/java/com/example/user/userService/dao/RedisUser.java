@@ -10,6 +10,8 @@ public class RedisUser implements Serializable {
     private String name;
     private String surname;
     private Integer age;
+    private String email;
+    private String mobile;
 
     public RedisUser() {
     }
@@ -53,13 +55,31 @@ public class RedisUser implements Serializable {
         this.age = age;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
     @Override
     public String toString() {
         return "RedisUser{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", age='" + age + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
                 '}';
     }
 }

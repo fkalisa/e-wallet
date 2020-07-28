@@ -3,7 +3,7 @@ package com.example.wallet.walletService.dao;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Transaction {
@@ -14,21 +14,21 @@ public class Transaction {
     private int amount;
     private int sid;//sender's id
     private int rid;//receiver id
-    private Date date;
+    private LocalDate date;
     private String status;
 
     public Transaction() {
     }
 
-    public Transaction(int amount, int sid, int rid, Date date, String status) {
+    public Transaction(int amount, int sid, int rid, String status) {
         this.amount = amount;
         this.sid = sid;
         this.rid = rid;
-        this.date = date;
         this.status = status;
+        this.date = LocalDate.now();
     }
 
-    public Transaction(int id, int amount, int sid, int rid, Date date, String status) {
+    public Transaction(int id, int amount, int sid, int rid, LocalDate date, String status) {
         this.id = id;
         this.amount = amount;
         this.sid = sid;
@@ -69,11 +69,11 @@ public class Transaction {
         this.rid = rid;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

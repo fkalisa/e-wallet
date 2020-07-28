@@ -1,6 +1,7 @@
 package com.example.user.userService.resource;
 
 import com.example.user.userService.dao.User;
+import com.example.user.userService.exception.UserBadRequest;
 import com.example.user.userService.exception.UserNotFoundException;
 import com.example.user.userService.request.UserRequest;
 import com.example.user.userService.service.UserService;
@@ -33,7 +34,7 @@ public class UserController {
         return userService.findAll();
     }
 
-    @ApiOperation("Retrieve a user for a given id")
+    @ApiOperation("Retrieve a user for a given Id")
     @GetMapping(BASE_PATH+"/{id}")
     @ResponseStatus(HttpStatus.OK)
     public User getUserById(@PathVariable Integer id) {
@@ -54,15 +55,21 @@ public class UserController {
         return responseEntity;
     }
 
-    @ApiOperation("Update a user for a given id")
+    @ApiOperation("Update a user for a given Id")
     @PutMapping(BASE_PATH+"/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateUserById(@PathVariable Integer id, @RequestBody  @Valid UserRequest userRequest) {
-        userService.findById(id).ifPresentOrElse(value -> {
-            value.setAge(userRequest.getAge());
-            value.setName(userRequest.getName());
-            value.setSurname(userRequest.getSurname());
-            userService.update(value);
+    public void updateUserById(@PathVariable Integer id, @RequestBody  @Valid UserRequest userRequest, Errors errors) {
+        if (errors.hasErrors()) {
+            throw new UserBadRequest(id);
+        }
+        userService.findById(id).ifPresentOrElse(user -> {
+            user.setId(id);
+            user.setAge(userRequest.getAge());
+            user.setName(userRequest.getName());
+            user.setSurname(userRequest.getSurname());
+            user.setEmail(userRequest.getEmail());
+            user.setMobile(userRequest.getMobile());
+            userService.update(user);
         }, () -> new UserNotFoundException(id));
 
 

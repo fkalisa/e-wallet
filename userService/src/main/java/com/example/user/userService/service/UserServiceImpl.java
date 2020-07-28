@@ -2,9 +2,10 @@ package com.example.user.userService.service;
 
 import com.example.user.userService.dao.User;
 import com.example.user.userService.dao.RedisUser;
+import com.example.user.userService.exception.UserNotFoundException;
 import com.example.user.userService.repository.UserRepository;
 import com.example.user.userService.repository.UserRepositoryRedis;
-import com.example.user.userService.utility.Mapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,24 +25,25 @@ public class UserServiceImpl implements UserService  {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
-    public Optional<User> findById(Integer id) {
-        Optional<User> user = null;
-
+    public Optional<User> findById(Integer id) throws UserNotFoundException {
+        Optional<User> optionalUser;
         RedisUser redisUser = userRepositoryRedis.findById(id);
         if(redisUser == null){
-           user = userRepository.findById(id);
-            userRepository.findById(id).ifPresent(value -> {});
-            if (user .isPresent()){
-                logger.info(String.format("Getting user %d from DB", id));
-                logger.info(String.format("saving user %d in Redis", id));
-                userRepositoryRedis.saveUser(Mapper.from(user.get()));
+            logger.info(String.format("...getting user %d from DB", id));
+            optionalUser = userRepository.findById(id);
+            if (optionalUser .isPresent()){
+
+                logger.info(String.format("...saving user %d in Redis", id));
+                userRepositoryRedis.saveUser(new ObjectMapper().convertValue(optionalUser.get(), RedisUser.class));
+            }else{
+                throw new UserNotFoundException(String.format("could not find a user with id", id));
             }
         }else{
 
-            user = Optional.of(Mapper.from(redisUser));
-            logger.info(String.format("Getting user %d from Redis", id));
+            optionalUser = Optional.ofNullable(new ObjectMapper().convertValue(redisUser, User.class));
+            logger.info(String.format("...getting user %d from Redis", id));
         }
-        return user;
+        return optionalUser;
     }
 
     @Override
@@ -55,16 +57,26 @@ public class UserServiceImpl implements UserService  {
     }
 
     @Override
-    public User update(User user) {
+    public User update(User user) throws UserNotFoundException {
 
         RedisUser redisUser = userRepositoryRedis.findById(user.getId());
+        if(redisUser == null){
+            redisUser = new RedisUser();
+        }
+
         redisUser.setAge(user.getAge());
         redisUser.setName(user.getName());
         redisUser.setSurname(user.getSurname());
-        logger.info(String.format("Updating user %d in Redis", user.getId()));
-        userRepositoryRedis.saveUser(Mapper.from(user));
-        logger.info(String.format("Updating user %d in DB", user.getId()));
-        userRepository.save(user);
+        redisUser.setMobile(user.getMobile());
+        redisUser.setEmail(user.getEmail());
+        logger.info(String.format("...updating user %d in Redis", user.getId()));
+        userRepositoryRedis.saveUser(redisUser);
+
+        user.setAge(user.getAge());
+        user.setName(user.getName());
+        user.setSurname(user.getSurname());
+
+        logger.info(String.format("...updating user %d in DB", user.getId()));
         return userRepository.save(user);
     }
 }

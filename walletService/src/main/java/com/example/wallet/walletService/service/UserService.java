@@ -1,6 +1,7 @@
 package com.example.wallet.walletService.service;
 
 import com.example.wallet.walletService.dao.User;
+import com.example.wallet.walletService.exception.UserNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -19,7 +21,7 @@ public class UserService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String BASE_URL = "http://127.0.0.1:8080/api/users/";
+    private final String BASE_URL = "http://127.0.0.1:8080/api/users";
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
@@ -34,18 +36,18 @@ public class UserService {
         return forEntity.getBody().getList();
     }
 
-    public User getUserById(String userId){
-        final String uri = BASE_URL+ "{userId}";
+    public Optional<User> getUserById(Integer userId) throws Exception {
+        final String uri = BASE_URL+ "/{userId}";
 
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("userId", userId);
+        Map<String, String> params = new HashMap<>();
+        params.put("userId", String.valueOf(userId));
 
         ResponseEntity<User> forEntity =
                 restTemplate.getForEntity(uri,  User.class,params);
         if(forEntity.getStatusCode().equals(HttpStatus.NOT_FOUND)){
-            return null;
+            throw new UserNotFoundException(userId);
         }
-        return forEntity.getBody();
+        return Optional.ofNullable(forEntity.getBody());
     }
 
 

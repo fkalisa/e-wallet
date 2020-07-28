@@ -1,20 +1,20 @@
 package com.example.wallet.walletService.request;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 public class WalletRequest {
 
     private int id;
 
-    @NotEmpty
+    @PositiveOrZero(message = "userId should be positive")
     private int user_id;
 
     @PositiveOrZero(message = "balance should be positive")
-    @NotEmpty
     private int balance;
 
-    @NotEmpty(message = "is_active should not be empty")
+    @NotNull(message = "is_active should not be empty")
     private Boolean is_active;
 
     @NotEmpty(message = "wallet_type should not be empty")

@@ -1,15 +1,13 @@
 package com.example.wallet.walletService.request;
 
-import org.springframework.stereotype.Service;
-
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class TransactionRequest {
     private int id;
     private int amount;
     private int sid;//sender's id
     private int rid;//receiver id
-    private Date date;
+    private LocalDate date;
     private String status;
 
     public int getId() {
@@ -44,11 +42,11 @@ public class TransactionRequest {
         this.rid = rid;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

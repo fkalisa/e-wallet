@@ -1,6 +1,6 @@
 package com.example.user.userService.request;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.*;
 
 public class UserRequest {
 
@@ -10,9 +10,12 @@ public class UserRequest {
     @NotEmpty(message = "surname should not be empty")
     private String surname;
 
-    @NotEmpty(message = "age should not be empty")
+    @Positive(message = "age should be positive")
+    @Min(value = 18, message = "Age should not be less than 18")
+    @Max(value = 70, message = "Age should not be greater than 70")
     private Integer age;
 
+    @Email(message = "email should be valid")
     private String email;
 
     private String mobile;
