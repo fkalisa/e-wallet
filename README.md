@@ -9,8 +9,10 @@
 2. walletService
     - running on port 8090
 
-## DB user
+## DB
+1. for UserService
 `create database wallet;`
+2. for WalletService
 `create database user;`
 
 ## Redis
