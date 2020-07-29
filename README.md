@@ -42,7 +42,7 @@ you need :
         
         https://myaccount.google.com/lesssecureapps
 
-#### Kafka
+## Kafka
 
 1. start ZooKeeper server
 `bin/zookeeper-server-start.sh config/zookeeper.properties`
@@ -58,7 +58,7 @@ you need :
 `bin/kafka-topics.sh --list --bootstrap-server localhost:9092`
 
 
-### PrintScreens 
+## PrintScreens 
 
     - email received 
 
