@@ -1,7 +1,7 @@
 ## Swagger
 
 1. API exposed : http://localhost:8080/swagger-ui.html
-2. APIs exposed : http://localhost:8090/swagger-ui.html
+2. API exposed : http://localhost:8090/swagger-ui.html
 
 ## Two services
 1. userService
@@ -11,9 +11,9 @@
 
 ## DB
 1. for UserService
-`create database wallet;`
-2. for WalletService
 `create database user;`
+2. for WalletService
+`create database wallet;`
 
 ## Redis
 1. start a standalone redis server
@@ -36,9 +36,7 @@ you need :
 5. a message
 
 ## Email
-1. sending email gmail 
-
-    - you must configure your Gmail account with the below steps:
+1. sending email gmail, you must configure your Gmail account with the below steps:
     - In the security section:
     - You need to Change "Allow less secure apps: OFF" to "Allow less secure apps: ON"
         
@@ -58,7 +56,6 @@ you need :
 
 4. list the topics 
 `bin/kafka-topics.sh --list --bootstrap-server localhost:9092`
-
 
 ## PrintScreens 
 
