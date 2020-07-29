@@ -1,19 +1,19 @@
-#### Swagger
+## Swagger
 
 1. API exposed : http://localhost:8080/swagger-ui.html
 2. APIs exposed : http://localhost:8090/swagger-ui.html
 
-#### Two services
+## Two services
 1. userService
     - running on port 8080
 2. walletService
     - running on port 8090
 
-#### DB user
+## DB user
 `create database wallet;`
 `create database user;`
 
-#### Redis
+## Redis
 1. start a standalone redis server
 $ `redis-server`
 2. delete a key named user
@@ -23,10 +23,17 @@ $ `redis-server`
 4. check if a user with name jamo is in redis (return 1 if the user exists)
 `HSET user name jamo`
 
-#SMS
-https://www.twilio.com/console
+## SMS
 
-#Email
+https://www.twilio.com/console
+you need :
+1. an account SID
+2. an auth token
+3. a phone from 
+4. a phone to
+5. a message
+
+## Email
 1. sending email gmail 
 
     - you must configure your Gmail account with the below steps:
@@ -57,6 +64,9 @@ https://www.twilio.com/console
 
 ![alt text](assets/screen-email.png)
 
+    - sma sent 
+    
+![alt text](assets/screen-sms.png)
 
     -  SMS received 
    
