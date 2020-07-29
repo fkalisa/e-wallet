@@ -39,7 +39,6 @@ public class TransactionServiceImpl implements TransactionService {
     public void getTransactionHistoryByUserId(Integer userId) {
         String new_id = userId+"txn";
         kafkaTemplate.send(TOPIC, new_id);
-
     }
 
     @Override

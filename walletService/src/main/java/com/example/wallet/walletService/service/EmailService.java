@@ -40,8 +40,7 @@ public class EmailService {
         }
         Properties properties = getProperties();
         // creates a new session with an authenticator
-        try
-        {
+        try {
             Authenticator auth = getAuthenticator();
             Session session = Session.getInstance(properties, auth);
 
@@ -82,9 +81,8 @@ public class EmailService {
             transport.connect("smtp.gmail.com", FROM_EMAIL, PASSWORD);
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();
-        }
-        catch (Exception e)
-        {
+
+        } catch (Exception e) {
             logger.info("Email not sent successfully"+e);
         }
     }

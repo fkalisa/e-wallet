@@ -9,24 +9,24 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URISyntaxException;
 
-public class SmsUtil {
+public  class SmsUtil {
     private static final Logger logger = LoggerFactory.getLogger(SmsUtil.class);
 
-    public final String ACCOUNT_SID = "AC4e7eafde3355607ea28918e2d8b2f1c9";
-    public  final String AUTH_TOKEN = "TODO";
+    static public final String ACCOUNT_SID = "AC4e7eafde3355607ea28918e2d8b2f1c9";
+    static public  final String AUTH_TOKEN = "TODO";
 
-    void sendSms()throws URISyntaxException {
+    static public void sendSms()throws URISyntaxException {
 
 
             Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-            /*
+
             Message message = Message
-                    .creator(new PhoneNumber("+32487555607"), // to
+                    .creator(new PhoneNumber("TODO_phone_to_be_sent_to"), // to
                             new PhoneNumber("+13076557472"), // from
-                            "Where's Wallace?")
+                            "Dear customer, transaction history has been sent to you by e-Wallet")
                     .create();
                       logger.info(message.getSid());
 
-             */
+
     }
 }

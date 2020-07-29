@@ -30,7 +30,7 @@ public class UserController {
     @ApiOperation("Find all the users")
     @GetMapping(BASE_PATH)
     @ResponseStatus(HttpStatus.OK)
-    public List<User> getUsers() {
+    public List<User> findAll() {
         return userService.findAll();
     }
 
@@ -43,7 +43,7 @@ public class UserController {
     }
     @ApiOperation("Create a user")
     @PostMapping(BASE_PATH)
-    public ResponseEntity<User> createUser(@RequestBody @Valid UserRequest userRequest, Errors errors) {
+    public ResponseEntity<User> createUser(@RequestBody @Valid UserRequest userRequest, Errors errors) throws Exception {
 
         if (errors.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

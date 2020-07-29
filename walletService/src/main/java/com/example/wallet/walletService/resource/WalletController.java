@@ -32,7 +32,7 @@ public class WalletController {
     @ApiOperation("Find all the wallets")
     @GetMapping(BASE_PATH)
     @ResponseStatus(HttpStatus.OK)
-    public List<Wallet> getWallets(){
+    public List<Wallet> findAll(){
         return walletService.findAll();
     }
 

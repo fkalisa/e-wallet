@@ -4,6 +4,7 @@ import com.example.wallet.walletService.dao.Transaction;
 import com.example.wallet.walletService.dao.User;
 import com.example.wallet.walletService.exception.UserNotFoundException;
 import com.example.wallet.walletService.repository.TransactionRepository;
+import com.example.wallet.walletService.utility.SmsUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,9 +97,11 @@ public class Consumer {
             fw.flush();
             fw.close();
             logger.info("CSV File is created successfully.");
-            EmailService.sendEmailWithAttachments("","",user.getEmail(),"","toEmail@gmail.com","","",filename);
+            SmsUtil.sendSms();
+            EmailService.sendEmailWithAttachments(null,null,user.getEmail(),null,"akaliza@gmail.com",null,null,filename);
+
         } catch (Exception e) {
-            e.printStackTrace();
+           logger.error("Error while sending transaction history" + e.getMessage());
         }
     }
 }

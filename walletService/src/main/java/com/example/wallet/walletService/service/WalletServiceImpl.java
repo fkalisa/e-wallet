@@ -65,7 +65,7 @@ public class WalletServiceImpl implements WalletService {
 
     @Override
     public void createWallet(Wallet wallet) throws Exception {
-        userService.getUserById(wallet.getUser_id()).ifPresentOrElse(value->{
+        userService.getUserById(wallet.getUser_id()).ifPresentOrElse(user->{
             walletRepository.save(wallet);
         }, () ->  new UserNotFoundException(wallet.getUser_id()));
     }
