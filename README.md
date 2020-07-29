@@ -10,14 +10,14 @@
     - running on port 8090
 
 ## DB
-1. for UserService
+1. for UserService 
 `create database user;`
-2. for WalletService
+2. for WalletService 
 `create database wallet;`
 
 ## Redis
 1. start a standalone redis server
-$ `redis-server`
+`redis-server`
 2. delete a key named user
 `redis-cli del user`
 3. get data for a given key
@@ -47,9 +47,7 @@ you need :
 1. start ZooKeeper server
 `bin/zookeeper-server-start.sh config/zookeeper.properties`
 
-2. change #listeners=PLAINTEXT://:9092 in server.properties to:
-
-`listeners=PLAINTEXT://localhost:9092`
+2. change `listeners=PLAINTEXT://:9092` in server.properties to `listeners=PLAINTEXT://localhost:9092`
 
 3. start the Kafka server
 `bin/kafka-server-start.sh config/server.properties`
