@@ -60,14 +60,13 @@ you need :
 
 ### PrintScreens 
 
-    - email sent 
+    - email received 
 
 ![alt text](assets/screen-email.png)
 
-    - sma sent 
+    - sms received 
     
 ![alt text](assets/screen-sms.png)
 
-    -  SMS received 
    
 
